@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 140" role="img" aria-label="아버지가 아들을 품에 안는 모습">
+  <!-- warm glow -->
+  <circle cx="80" cy="74" r="66" fill="#f7e6cf"/>
+  <circle cx="80" cy="74" r="66" fill="none" stroke="#e6cfa6" stroke-width="1.5"/>
+
+  <!-- Father (taller, behind) -->
+  <path d="M70 134 C64 98 70 64 92 60 C114 64 122 98 116 134 Z" fill="#8a6230"/>
+  <circle cx="98" cy="42" r="17" fill="#f0cb9e"/>
+  <path d="M98 24 C113 24 117 38 115 51 C110 43 104 40 98 40 C92 40 86 43 81 51 C79 38 83 24 98 24 Z" fill="#5b3d1d"/>
+  <path d="M83 50 C85 64 111 64 113 50 C113 60 107 70 98 70 C89 70 83 60 83 50 Z" fill="#5b3d1d"/>
+
+  <!-- Son (shorter, in front, leaning into father) -->
+  <path d="M28 134 C26 104 33 80 52 77 C71 80 75 104 71 134 Z" fill="#c79a5c"/>
+  <!-- son's arm around father's waist -->
+  <path d="M58 88 C76 82 92 88 100 104" fill="none" stroke="#c79a5c" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="52" cy="67" r="14.5" fill="#f6d6ae"/>
+  <path d="M52 53 C64 53 67 61 66 70 C62 63 57 61 52 61 C47 61 42 63 38 70 C37 61 40 53 52 53 Z" fill="#33220f"/>
+
+  <!-- Father's arm wrapping over son's back (the embrace) -->
+  <path d="M93 64 C74 56 50 62 40 86" fill="none" stroke="#8a6230" stroke-width="13" stroke-linecap="round"/>
+</svg>
