@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>KARA:Arts 4차 단기선교 · 기도카드</title>
+<meta name="description" content="KARA:Arts 4th Missionary Journey (2026.07.08~07.15) — 함께 기도하고 응원해 주세요." />
+
+<!-- Open Graph (카카오톡/링크 공유 시 미리보기) -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="KARA:Arts 4차 단기선교 기도카드" />
+<meta property="og:description" content="우리를 지으신 하나님을 찬송하는 제자들 · 2026.07.08~07.15 · 함께 기도하고 응원해 주세요 🙏" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<!-- QR code generator -->
+<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@gh-pages/qrcode.min.js"></script>
+
+<style>
+  :root{
+    --ink:#2b2622;
+    --soft:#6f655c;
+    --line:#e7ded2;
+    --paper:#fbf7f0;
+    --card:#ffffff;
+    --accent:#b9884e;      /* warm gold */
+    --accent-deep:#8a6230;
+    --sky1:#cfe1f0;
+    --sky2:#f3e8d8;
+    --maxw:680px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Noto Sans KR',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:64px 20px 52px;
+    text-align:center;
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(255,255,255,.7), transparent 60%),
+      linear-gradient(160deg,var(--sky1) 0%, var(--sky2) 100%);
+    overflow:hidden;
+  }
+  .hero .eyebrow{
+    font-family:'Gowun Dodum',sans-serif;
+    letter-spacing:.32em;
+    font-size:12px;
+    color:var(--accent-deep);
+    text-transform:uppercase;
+    margin:0 0 18px;
+  }
+  .hero h1{
+    font-family:'Gowun Batang',serif;
+    font-weight:700;
+    font-size:clamp(26px,7vw,40px);
+    line-height:1.3;
+    margin:0 0 6px;
+    letter-spacing:-.01em;
+  }
+  .hero h1 .en{display:block;font-size:.62em;color:var(--soft);font-weight:400;margin-top:10px;letter-spacing:.02em}
+  .hero .dates{
+    display:inline-block;margin-top:22px;padding:8px 20px;
+    border:1px solid var(--accent);border-radius:999px;
+    font-family:'Gowun Dodum',sans-serif;font-size:15px;color:var(--accent-deep);
+    background:rgba(255,255,255,.55);
+  }
+  .hero .theme{
+    margin:26px auto 0;max-width:420px;
+    font-family:'Gowun Batang',serif;font-size:18px;color:var(--ink);
+  }
+  .hero .theme small{display:block;font-family:'Gowun Dodum',sans-serif;color:var(--soft);font-size:13px;letter-spacing:.1em;margin-bottom:6px}
+
+  /* ---------- SECTION ---------- */
+  section{padding:46px 0}
+  .sec-tag{
+    font-family:'Gowun Dodum',sans-serif;font-size:12px;letter-spacing:.25em;
+    color:var(--accent);text-align:center;margin:0 0 8px;text-transform:uppercase;
+  }
+  h2{
+    font-family:'Gowun Batang',serif;font-weight:700;
+    font-size:clamp(21px,5vw,27px);text-align:center;margin:0 0 28px;letter-spacing:-.01em;
+  }
+  h3{font-family:'Gowun Batang',serif;font-size:19px;margin:0 0 10px}
+  p{margin:0 0 14px}
+  .lead{color:var(--soft)}
+
+  .verse{
+    margin:20px 0;padding:18px 22px;border-left:3px solid var(--accent);
+    background:#fff;border-radius:0 12px 12px 0;
+    font-family:'Gowun Batang',serif;color:var(--accent-deep);
+    box-shadow:0 1px 0 var(--line);
+  }
+  .verse span{display:block;margin-top:8px;font-family:'Gowun Dodum',sans-serif;font-size:13px;color:var(--soft)}
+
+  .divider{height:1px;background:var(--line);max-width:60px;margin:0 auto 30px}
+
+  /* team grid */
+  .team{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin-top:6px}
+  .member{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px 8px;text-align:center;font-size:15px;
+  }
+  .member.lead{border-color:var(--accent);background:#fffaf1}
+  .member .role{display:block;font-size:11px;color:var(--accent-deep);margin-top:3px;font-family:'Gowun Dodum',sans-serif}
+
+  /* program cards */
+  .prog{display:grid;gap:14px}
+  .prog .item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .prog .item h3{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .prog .item .em{font-size:22px}
+  .prog .item p{margin:0;color:var(--soft);font-size:15px}
+
+  /* prayer list */
+  .prayers{counter-reset:p;display:grid;gap:16px}
+  .pray{
+    position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px 22px 20px 56px;
+  }
+  .pray::before{
+    counter-increment:p;content:counter(p);
+    position:absolute;left:18px;top:20px;width:26px;height:26px;border-radius:50%;
+    background:var(--accent);color:#fff;font-family:'Gowun Dodum',sans-serif;font-size:14px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .pray .ref{display:block;margin-top:10px;font-family:'Gowun Batang',serif;font-style:italic;color:var(--accent-deep);font-size:14px}
+
+  /* support box */
+  .support{background:linear-gradient(160deg,#fff,#fbf2e3);border:1px solid var(--accent);border-radius:16px;padding:26px;text-align:center}
+  .support .label{font-family:'Gowun Dodum',sans-serif;letter-spacing:.2em;font-size:12px;color:var(--accent-deep)}
+  .support .num{font-family:'Gowun Batang',serif;font-size:22px;margin:10px 0 4px}
+  .support .bank{color:var(--soft);font-size:14px}
+
+  /* ---------- COMMENTS ---------- */
+  .cheer{background:linear-gradient(180deg,#fff,#fbf7f0)}
+  .form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:26px}
+  .form .row{display:flex;gap:10px;margin-bottom:12px}
+  .form input,.form textarea{
+    width:100%;border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+    font-family:inherit;font-size:15px;color:var(--ink);background:#fdfbf7;resize:vertical;
+  }
+  .form input:focus,.form textarea:focus{outline:none;border-color:var(--accent)}
+  .form .name{flex:0 0 38%}
+  .form button{
+    width:100%;border:none;border-radius:10px;padding:14px;cursor:pointer;
+    background:var(--accent);color:#fff;font-family:'Gowun Dodum',sans-serif;font-size:16px;
+    transition:background .15s;
+  }
+  .form button:hover{background:var(--accent-deep)}
+  .form button:disabled{opacity:.5;cursor:default}
+  .hint{font-size:12px;color:var(--soft);margin:8px 2px 0}
+
+  .count{text-align:center;color:var(--soft);font-size:14px;margin-bottom:18px}
+  .wall{display:grid;gap:12px}
+  .msg{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;
+    animation:rise .4s ease both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .msg .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
+  .msg .who{font-weight:700;font-size:15px}
+  .msg .when{font-size:12px;color:var(--soft);flex:0 0 auto}
+  .msg .body{white-space:pre-wrap;word-break:break-word;color:#473f38}
+  .empty{text-align:center;color:var(--soft);padding:30px;font-family:'Gowun Dodum',sans-serif}
+
+  .banner{
+    max-width:var(--maxw);margin:0 auto;padding:10px 16px;font-size:13px;
+    background:#fff6e6;border:1px solid #f0d9a8;border-radius:10px;color:#8a6230;text-align:center;
+  }
+
+  /* ---------- QR / SHARE ---------- */
+  .qrsec{text-align:center}
+  .qrbox{
+    display:inline-block;background:#fff;border:1px solid var(--line);border-radius:18px;
+    padding:22px;box-shadow:0 6px 24px rgba(120,90,40,.08);
+  }
+  #qrcode{display:flex;justify-content:center}
+  #qrcode img,#qrcode canvas{border-radius:6px}
+  .qrsec .url{font-size:13px;color:var(--soft);margin-top:14px;word-break:break-all}
+  .sharebtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+  .sharebtns button{
+    border:1px solid var(--accent);background:#fff;color:var(--accent-deep);
+    padding:10px 18px;border-radius:999px;font-family:'Gowun Dodum',sans-serif;font-size:14px;cursor:pointer;
+  }
+  .sharebtns button:hover{background:#fffaf1}
+
+  footer{text-align:center;padding:40px 20px 60px;color:var(--soft);font-size:13px;font-family:'Gowun Dodum',sans-serif}
+  footer .cross{font-size:18px;color:var(--accent);margin-bottom:10px}
+
+  @media print{
+    .cheer,.form,.sharebtns,.banner{display:none}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <p class="eyebrow">KARA : Arts</p>
+  <h1>
+    제4차 단기선교
+    <span class="en">The 4th Missionary Journey</span>
+  </h1>
+  <div class="dates">2026. 07. 08 – 07. 15</div>
+  <p class="theme"><small>이번 선교의 주제</small>우리를 지으신 하나님을<br/>찬송하는 제자들</p>
+</header>
+
+<main>
+  <!-- ============ WHO ============ -->
+  <section class="wrap">
+    <p class="sec-tag">Who We Are</p>
+    <h2>카라 선교팀은 누구인가요?</h2>
+    <div class="divider"></div>
+    <h3>👋 하나님의 기쁨, 카라!</h3>
+    <p class="lead">카라는 한국예술종합학교 기독교 동아리 KARA에서 시작된, 하나님의 명령에 따라 문화선교 사역에 힘쓰는 청년들의 모임이에요. KARA는 히브리어로 <b>‘하나님의 기쁨’</b>이라는 뜻입니다. 우리는 하나님의 기쁨이 되고자 여기에 모였어요!</p>
+    <div class="verse">너는 청년의 때에 너의 창조주를 기억하라<span>전도서 12:1</span></div>
+    <p class="lead">청년의 때에 하나님을 기억하는 것은 쉽지 않습니다. 그러나 카라는 그 쉽지 않은 상황 속에서도 하나님을 생각했어요. 하나님께서 주신 달란트를 나의 영광이 아니라 하나님께 드리기 위해, 우리의 재능을 생명을 살리고 복음을 전하는 일에 쓰기로 결심했습니다.</p>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section class="wrap">
+    <p class="sec-tag">13 Disciples</p>
+    <h2>🗽 선교를 떠나는 열세 명의 제자들</h2>
+    <div class="divider"></div>
+    <div class="team" id="team"></div>
+  </section>
+
+  <!-- ============ WHERE ============ -->
+  <section class="wrap">
+    <p class="sec-tag">Where</p>
+    <h2>어디로 복음을 전하러 가나요?</h2>
+    <div class="divider"></div>
+    <h3>✈️ 필리핀 카비테 (Cavite)</h3>
+    <p class="lead">카비테 지역은 루손섬에 위치하며 인구는 약 10만 명, 마닐라만에 접해 마닐라 남서쪽 약 16km 지점에 있습니다. 카라는 2007년부터 이 지역에 교회를 세우고 복음화를 위해 힘써오신 <b>배기창·최수정 선교사님</b>과 협력하여, 빈민촌 랑까안 지역을 섬기는 <b>All One in Christ Church(AOICC)</b>에서 사역을 감당합니다.</p>
+    <p class="lead">카라의 필리핀 선교는 이번이 처음이 아니에요. 하나님의 임재하심을 경험했던 지난 겨울에 이어, 다시 그 땅을 찾아갑니다 😍</p>
+  </section>
+
+  <!-- ============ PROGRAM ============ -->
+  <section class="wrap">
+    <p class="sec-tag">Mission</p>
+    <h2>👨‍👩‍👧‍👦 무엇을 하나요?</h2>
+    <div class="divider"></div>
+    <div class="prog">
+      <div class="item"><h3><span class="em">🎭</span>스킷드라마 — <i>Lost Sons</i></h3><p>집을 떠나 세상 속에서 방황하는 아들, 그리고 한 자리에서 그 아들을 기다리는 아버지를 비유적으로 풀어낸 드라마.</p></div>
+      <div class="item"><h3><span class="em">🎶</span>뮤지컬 갈라쇼</h3><p>따뜻하고 희망적인 메시지를 담은 뮤지컬 갈라쇼.</p></div>
+      <div class="item"><h3><span class="em">💃</span>워십댄스</h3><p>다윗과 같이 온몸으로 드리는 찬양.</p></div>
+      <div class="item"><h3><span class="em">🎨</span>클리닉 &amp; 페이스페인팅</h3><p>현지 청소년·청년들에게 2회에 걸쳐 ‘드라마’ &amp; ‘워십댄스’ 클래스를 진행하며, 전공을 통해 영혼들과 소통하고 깊이 교제합니다.</p></div>
+      <div class="item"><h3><span class="em">🏠</span>가정 방문</h3><p>AOICC 교회 아이들은 대부분 열악한 터전에서 생활합니다. 그들의 집을 방문하고 함께 모여 기도합니다.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ PRAYER ============ -->
+  <section class="wrap">
+    <p class="sec-tag">Pray With Us</p>
+    <h2>🙏 함께 기도해 주세요</h2>
+    <div class="divider"></div>
+    <div class="prayers">
+      <div class="pray">이번 단기선교를 통해 우리를 지으신 하나님의 목적, 곧 하나님을 찬송함에 대한 깊은 은혜와 깨달음이 부어지게 하소서.<span class="ref">“이 백성은 내가 나를 위하여 지었나니 나를 찬송하게 하려 함이니라” — 이사야 43:21</span></div>
+      <div class="pray">이 여정을 통하여 각자의 일상 속 바람과 꿈을 주님께 내려놓고, 하나님께서 주신 세상 영혼들을 향한 구원의 비전을 발견하게 하소서.<span class="ref">“나를 따라오라 내가 너희를 사람을 낚는 어부가 되게 하리라” — 마태복음 4:19</span></div>
+      <div class="pray">이번 선교 여행에서 아버지와 아들 됨을 깊게 경험하는 은혜를 허락하소서.<span class="ref">“아직도 거리가 먼데 아버지가 그를 보고 측은히 여겨 달려가 목을 안고 입을 맞추니” — 누가복음 15:20</span></div>
+      <div class="pray">카라 선교팀과 현지 배기창·최수정 선교사님, AOICC 교회의 연합을 통해 동역으로 일하시는 하나님을 목도하게 하소서.<span class="ref">“하나님을 사랑하는 자… 에게는 모든 것이 합력하여 선을 이루느니라” — 로마서 8:28</span></div>
+      <div class="pray">선교 여정 가운데 안전과 건강을 지켜주시고, 자비량으로 떠나는 모든 팀원에게 필요한 모든 물질의 공급하심을 경험하게 하소서.<span class="ref">“각 사람의 필요를 따라 나누어 줌이라” — 사도행전 4:34–35</span></div>
+    </div>
+  </section>
+
+  <!-- ============ SUPPORT ============ -->
+  <section class="wrap">
+    <div class="support">
+      <div class="label">후원 문의</div>
+      <div class="num">010-5593-9610</div>
+      <div class="bank">카카오뱅크 3333-18-5192491 · 예금주 이주찬</div>
+    </div>
+  </section>
+
+  <!-- ============ CHEER / COMMENTS ============ -->
+  <section class="cheer" id="cheer">
+    <div class="wrap">
+      <p class="sec-tag">Leave a Message</p>
+      <h2>💌 응원과 기도 한마디</h2>
+      <div class="divider"></div>
+
+      <div id="modeBanner" class="banner" style="display:none;margin-bottom:18px"></div>
+
+      <form class="form" id="cheerForm" autocomplete="off">
+        <div class="row">
+          <input class="name" id="who" maxlength="20" placeholder="이름/별명" required />
+        </div>
+        <div class="row">
+          <textarea id="text" rows="3" maxlength="500" placeholder="선교팀에게 응원과 기도의 한마디를 남겨주세요 🙏" required></textarea>
+        </div>
+        <button type="submit" id="submitBtn">응원 남기기</button>
+        <p class="hint">남겨주신 메시지는 선교팀에게 큰 힘이 됩니다. 따뜻한 마음 감사합니다.</p>
+      </form>
+
+      <p class="count" id="count"></p>
+      <div class="wall" id="wall"></div>
+    </div>
+  </section>
+
+  <!-- ============ QR / SHARE ============ -->
+  <section class="qrsec wrap" id="share">
+    <p class="sec-tag">Share</p>
+    <h2>📲 기도카드 나누기</h2>
+    <div class="divider"></div>
+    <p class="lead">아래 QR코드를 찍으면 이 페이지로 연결됩니다.<br/>카드로 인쇄하거나 링크를 공유해 더 많은 분들과 함께 기도해요.</p>
+    <div class="qrbox">
+      <div id="qrcode"></div>
+    </div>
+    <p class="url" id="pageUrl"></p>
+    <div class="sharebtns">
+      <button onclick="copyLink()">🔗 링크 복사</button>
+      <button onclick="window.print()">🖨️ 카드 인쇄</button>
+      <button onclick="shareNative()">📤 공유하기</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="cross">✝</div>
+  KARA : Arts · 4th Missionary Journey 2026<br/>
+  우리를 지으신 하나님을 찬송하는 제자들
+</footer>
+
+<script>
+/* =========================================================
+   CONFIG — 댓글 저장 백엔드
+   ---------------------------------------------------------
+   응원댓글을 여러 사람이 함께 보려면 백엔드가 필요합니다.
+   Google Apps Script로 5분이면 무료로 만들 수 있어요.
+   (방법은 함께 드린 README.md 참고)
+
+   배포 후 받은 주소를 아래 BACKEND_URL 에 붙여넣으세요.
+   비워두면 이 기기에서만 보이는 '미리보기 모드'로 동작합니다.
+   ========================================================= */
+const BACKEND_URL = ""; // 예: "https://script.google.com/macros/s/AKfy.../exec"
+
+/* ---------- 팀원 명단 ---------- */
+const MEMBERS = [
+  {name:"이주찬", role:"팀장"},
+  {name:"김시온"},{name:"김은솔"},{name:"김평온"},{name:"남규빈"},
+  {name:"박재찬"},{name:"심찬미"},{name:"엄예지"},{name:"오하윤"},
+  {name:"이재윤"},{name:"최진혁"},{name:"배현주"},{name:"이우철"},
+];
+(function renderTeam(){
+  const el=document.getElementById('team');
+  el.innerHTML=MEMBERS.map(m=>
+    `<div class="member${m.role?' lead':''}">${m.name}${m.role?`<span class="role">${m.role}</span>`:''}</div>`
+  ).join('');
+})();
+
+/* ---------- QR & URL ---------- */
+(function setupQR(){
+  const url=location.href.split('#')[0];
+  document.getElementById('pageUrl').textContent=url;
+  try{
+    new QRCode(document.getElementById('qrcode'),{
+      text:url, width:200, height:200,
+      colorDark:"#2b2622", colorLight:"#ffffff",
+      correctLevel:QRCode.CorrectLevel.M
+    });
+  }catch(e){ document.getElementById('qrcode').textContent="QR 생성 실패"; }
+})();
+
+function copyLink(){
+  const url=location.href.split('#')[0];
+  navigator.clipboard.writeText(url).then(()=>alert('링크가 복사되었어요!')).catch(()=>prompt('아래 링크를 복사하세요:',url));
+}
+function shareNative(){
+  const url=location.href.split('#')[0];
+  if(navigator.share){navigator.share({title:'KARA:Arts 4차 단기선교 기도카드',text:'함께 기도하고 응원해 주세요 🙏',url});}
+  else copyLink();
+}
+
+/* ---------- 댓글 ---------- */
+const wall=document.getElementById('wall');
+const countEl=document.getElementById('count');
+const form=document.getElementById('cheerForm');
+const submitBtn=document.getElementById('submitBtn');
+const banner=document.getElementById('modeBanner');
+const USE_BACKEND = !!BACKEND_URL;
+
+if(!USE_BACKEND){
+  banner.style.display='block';
+  banner.innerHTML='🔧 <b>미리보기 모드</b> — 지금은 이 기기에서만 댓글이 보여요. 모두가 함께 보려면 README의 백엔드 연결을 따라주세요.';
+}
+
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function timeAgo(ts){
+  const d=Math.floor((Date.now()-ts)/1000);
+  if(d<60)return'방금 전';
+  if(d<3600)return Math.floor(d/60)+'분 전';
+  if(d<86400)return Math.floor(d/3600)+'시간 전';
+  const date=new Date(ts);
+  return `${date.getMonth()+1}.${date.getDate()}`;
+}
+function render(list){
+  if(!list.length){wall.innerHTML='<div class="empty">아직 응원이 없어요. 첫 번째 응원을 남겨주세요 💛</div>';countEl.textContent='';return;}
+  countEl.textContent=`💛 ${list.length}개의 응원이 모였어요`;
+  wall.innerHTML=list.map(m=>`
+    <div class="msg">
+      <div class="top"><span class="who">${escapeHtml(m.who)}</span><span class="when">${timeAgo(m.ts)}</span></div>
+      <div class="body">${escapeHtml(m.text)}</div>
+    </div>`).join('');
+}
+
+/* --- localStorage (미리보기 모드) --- */
+const LS='kara_cheers_v1';
+const lsGet=()=>{try{return JSON.parse(localStorage.getItem(LS))||[]}catch(e){return[]}};
+const lsSet=a=>localStorage.setItem(LS,JSON.stringify(a));
+
+async function load(){
+  if(USE_BACKEND){
+    try{
+      const r=await fetch(BACKEND_URL);
+      const data=await r.json();
+      const list=(data.items||data||[]).map(x=>({who:x.who,text:x.text,ts:Number(x.ts)})).sort((a,b)=>b.ts-a.ts);
+      render(list);
+    }catch(e){ banner.style.display='block'; banner.textContent='⚠️ 댓글을 불러오지 못했어요. 잠시 후 새로고침 해주세요.'; }
+  }else{
+    render(lsGet().sort((a,b)=>b.ts-a.ts));
+  }
+}
+
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const who=document.getElementById('who').value.trim();
+  const text=document.getElementById('text').value.trim();
+  if(!who||!text)return;
+  submitBtn.disabled=true; submitBtn.textContent='남기는 중...';
+  const item={who,text,ts:Date.now()};
+  try{
+    if(USE_BACKEND){
+      await fetch(BACKEND_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(item)});
+    }else{
+      const a=lsGet(); a.push(item); lsSet(a);
+    }
+    form.reset();
+    await load();
+    document.getElementById('count').scrollIntoView({behavior:'smooth',block:'center'});
+  }catch(err){
+    alert('전송에 실패했어요. 잠시 후 다시 시도해주세요.');
+  }finally{
+    submitBtn.disabled=false; submitBtn.textContent='응원 남기기';
+  }
+});
+
+load();
+</script>
+</body>
+</html>
