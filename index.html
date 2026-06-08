@@ -231,9 +231,9 @@
   .journey .jmsg{font-family:'Gowun Dodum',sans-serif;font-size:12.5px;color:var(--soft);text-align:right}
   .journey .jtrack{position:relative;height:34px;margin:0 8px}
   .journey .jtrack::before{content:'';position:absolute;left:0;right:0;top:50%;height:0;border-top:2px dashed #e3cfa6;transform:translateY(-50%)}
-  .journey .jfill{position:absolute;left:0;top:50%;height:2px;background:var(--accent);width:0;transform:translateY(-50%);transition:width .9s ease}
+  .journey .jfill{position:absolute;right:0;top:50%;height:2px;background:var(--accent);width:0;transform:translateY(-50%);transition:width .9s ease}
   .journey .json{position:absolute;top:50%;left:0;transform:translate(-50%,-50%);font-size:25px;transition:left .9s ease;z-index:2}
-  .journey .jhome{position:absolute;right:-2px;top:50%;transform:translateY(-50%);font-size:24px}
+  .journey .jhome{position:absolute;left:-2px;top:50%;transform:translateY(-50%);font-size:24px}
   .journey.arrived{box-shadow:0 0 0 3px rgba(185,136,78,.18)}
   .journey.arrived .jhome{opacity:0}
   .journey .jverse{margin-top:16px;font-family:'Gowun Batang',serif;font-size:12.5px;font-style:italic;color:var(--accent-deep);text-align:center;line-height:1.65}
@@ -658,7 +658,7 @@ function timeAgo(ts){
 function updateJourney(total){
   const pct=Math.min(total/100,1)*100;
   jfill.style.width=pct+'%';
-  json.style.left=pct+'%';
+  json.style.left=(100-pct)+'%';
   jcount.textContent = total>=100 ? '100 / 100  🎉' : `${total} / 100`;
   let emoji='🚶', msg;
   if(total>=100){ emoji='🤗'; msg='아버지가 달려가 아들을 안았습니다!'; }
