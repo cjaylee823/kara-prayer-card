@@ -159,6 +159,15 @@
     display:inline-flex;align-items:center;gap:6px;transition:color .15s,border-color .15s;
   }
   .prayctl button:hover{border-color:var(--accent);color:var(--accent-deep)}
+  .gotocheer{display:flex;justify-content:center;margin-top:4px}
+  .gotocheer button{
+    border:none;background:var(--accent);color:#fff;cursor:pointer;
+    font-family:'Gowun Dodum',sans-serif;font-size:15px;padding:13px 26px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 14px rgba(120,90,40,.18);
+    transition:background .15s,transform .1s;
+  }
+  .gotocheer button:hover{background:var(--accent-deep)}
+  .gotocheer button:active{transform:scale(.97)}
 
   /* support box */
   .support{background:linear-gradient(160deg,#fff,#fbf2e3);border:1px solid var(--accent);border-radius:16px;padding:26px;text-align:center}
@@ -369,6 +378,7 @@
         <div class="content">선교 여정 가운데 안전과 건강을 지켜주시고, 자비량으로 떠나는 모든 팀원에게 필요한 모든 물질의 공급하심을 경험하게 하소서.<span class="ref">“각 사람의 필요를 따라 나누어 줌이라” — 사도행전 4:34–35</span></div>
       </details>
     </div>
+    <div class="gotocheer"><button type="button" onclick="goToCheer()">💌 응원·기도 남기러 가기 ↓</button></div>
   </section>
 
   <!-- ============ CHEER / COMMENTS ============ -->
@@ -464,6 +474,14 @@ const MEMBERS = [
     window.scrollTo({top:bar.offsetTop,behavior:'smooth'});
   }));
 })();
+
+/* ---------- 응원/기도 구역으로 이동 ---------- */
+function goToCheer(){
+  const el=document.getElementById('cheer');
+  const bar=document.getElementById('tabs');
+  const y=el.getBoundingClientRect().top+window.scrollY-(bar?bar.offsetHeight:0)-8;
+  window.scrollTo({top:y,behavior:'smooth'});
+}
 
 /* ---------- 기도제목 모두 접기/펼치기 ---------- */
 (function setupToggleAll(){
