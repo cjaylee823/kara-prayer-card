@@ -1,6 +1,6 @@
 # KARA:Arts 4차 단기선교 · 기도카드 웹페이지 🙏
 
-> 🌐 **라이브 사이트:** https://jaylee-returnall.github.io/kara-prayer-card/
+> 🌐 **라이브 사이트:** https://cjaylee823.github.io/kara-prayer-card/
 > 📲 **QR 이미지:** [`kara-qr.png`](kara-qr.png) — 인쇄·공유용
 >
 > 수정 후 `git push` 하면 1~2분 뒤 사이트에 자동 반영됩니다.
