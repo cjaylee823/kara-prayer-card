@@ -215,8 +215,29 @@
   footer{text-align:center;padding:40px 20px 60px;color:var(--soft);font-size:13px;font-family:'Gowun Dodum',sans-serif}
   footer .cross{font-size:18px;color:var(--accent);margin-bottom:10px}
 
+  /* copy-fallback row */
+  .urlcopy{display:flex;gap:8px;max-width:420px;margin:14px auto 0;align-items:stretch}
+  .urlcopy input{
+    flex:1;border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+    font-size:13px;color:var(--soft);background:#fdfbf7;font-family:inherit;
+  }
+  .urlcopy button{
+    flex:0 0 auto;border:1px solid var(--accent);background:#fff;color:var(--accent-deep);
+    border-radius:10px;padding:0 16px;font-family:'Gowun Dodum',sans-serif;font-size:14px;cursor:pointer;
+  }
+
+  /* toast */
+  #toast{
+    position:fixed;left:50%;bottom:32px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;padding:13px 22px;border-radius:999px;
+    font-size:15px;font-family:'Gowun Dodum',sans-serif;z-index:999;
+    opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;white-space:nowrap;
+    box-shadow:0 6px 20px rgba(0,0,0,.18);
+  }
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
   @media print{
-    .cheer,.form,.sharebtns,.banner,.tabs{display:none}
+    .cheer,.form,.sharebtns,.banner,.tabs,.urlcopy,#toast{display:none}
     .panel{display:block!important}
     body{background:#fff}
   }
@@ -345,11 +366,14 @@
     <div class="qrbox">
       <div id="qrcode"></div>
     </div>
-    <p class="url" id="pageUrl"></p>
     <div class="sharebtns">
-      <button onclick="copyLink()">🔗 링크 복사</button>
-      <button onclick="window.print()">🖨️ 카드 인쇄</button>
-      <button onclick="shareNative()">📤 공유하기</button>
+      <button type="button" onclick="shareNative()">📤 공유하기</button>
+      <button type="button" onclick="copyLink()">🔗 링크 복사</button>
+      <button type="button" onclick="window.print()">🖨️ 카드 인쇄</button>
+    </div>
+    <div class="urlcopy">
+      <input id="pageUrl" readonly onclick="this.select()" />
+      <button type="button" onclick="copyLink()">복사</button>
     </div>
   </section>
 </main>
@@ -404,7 +428,7 @@ const MEMBERS = [
 /* ---------- QR & URL ---------- */
 (function setupQR(){
   const url=location.href.split('#')[0];
-  document.getElementById('pageUrl').textContent=url;
+  document.getElementById('pageUrl').value=url;
   try{
     new QRCode(document.getElementById('qrcode'),{
       text:url, width:200, height:200,
@@ -414,14 +438,55 @@ const MEMBERS = [
   }catch(e){ document.getElementById('qrcode').textContent="QR 생성 실패"; }
 })();
 
-function copyLink(){
-  const url=location.href.split('#')[0];
-  navigator.clipboard.writeText(url).then(()=>alert('링크가 복사되었어요!')).catch(()=>prompt('아래 링크를 복사하세요:',url));
+let toastTimer;
+function toast(msg){
+  let el=document.getElementById('toast');
+  if(!el){el=document.createElement('div');el.id='toast';document.body.appendChild(el);}
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('show'),2200);
 }
-function shareNative(){
+function legacyCopy(text){
+  try{
+    const ta=document.createElement('textarea');
+    ta.value=text; ta.setAttribute('readonly','');
+    ta.style.position='fixed'; ta.style.top='0'; ta.style.left='0'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    ta.setSelectionRange(0,text.length);
+    const ok=document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  }catch(e){ return false; }
+}
+async function copyLink(){
   const url=location.href.split('#')[0];
-  if(navigator.share){navigator.share({title:'KARA:Arts 4차 단기선교 기도카드',text:'함께 기도하고 응원해 주세요 🙏',url});}
-  else copyLink();
+  let ok=false;
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(url); ok=true;
+    }
+  }catch(e){ ok=false; }
+  if(!ok) ok=legacyCopy(url);
+  if(ok){
+    toast('링크가 복사되었어요! 🔗');
+  }else{
+    // 마지막 폴백: 주소창을 선택해 직접 복사하도록 안내
+    const inp=document.getElementById('pageUrl');
+    inp.scrollIntoView({behavior:'smooth',block:'center'});
+    inp.focus(); inp.select();
+    toast('아래 주소를 길게 눌러 복사하세요 👇');
+  }
+}
+async function shareNative(){
+  const url=location.href.split('#')[0];
+  if(navigator.share){
+    try{
+      await navigator.share({title:'KARA:Arts 4차 단기선교 기도카드',text:'함께 기도하고 응원해 주세요 🙏',url});
+      return;
+    }catch(e){
+      if(e && e.name==='AbortError') return; // 사용자가 공유 취소
+    }
+  }
+  copyLink(); // 공유 미지원 환경(카카오톡 인앱 등) → 링크 복사로 대체
 }
 
 /* ---------- 댓글 ---------- */
