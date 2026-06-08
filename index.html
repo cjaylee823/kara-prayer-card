@@ -224,6 +224,27 @@
   .msg .body{white-space:pre-wrap;word-break:break-word;color:#473f38}
   .empty{text-align:center;color:var(--soft);padding:30px;font-family:'Gowun Dodum',sans-serif}
 
+  /* 100개 여정 — 탕자의 귀향 */
+  .journey{background:linear-gradient(160deg,#fff,#fbf2e3);border:1px solid var(--accent);border-radius:16px;padding:20px 18px;margin-bottom:26px}
+  .journey .jtop{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:18px}
+  .journey .jcount{font-family:'Gowun Batang',serif;font-size:18px;font-weight:700;color:var(--accent-deep);flex:0 0 auto}
+  .journey .jmsg{font-family:'Gowun Dodum',sans-serif;font-size:12.5px;color:var(--soft);text-align:right}
+  .journey .jtrack{position:relative;height:34px;margin:0 8px}
+  .journey .jtrack::before{content:'';position:absolute;left:0;right:0;top:50%;height:0;border-top:2px dashed #e3cfa6;transform:translateY(-50%)}
+  .journey .jfill{position:absolute;left:0;top:50%;height:2px;background:var(--accent);width:0;transform:translateY(-50%);transition:width .9s ease}
+  .journey .json{position:absolute;top:50%;left:0;transform:translate(-50%,-50%);font-size:25px;transition:left .9s ease;z-index:2}
+  .journey .jhome{position:absolute;right:-2px;top:50%;transform:translateY(-50%);font-size:24px}
+  .journey.arrived{box-shadow:0 0 0 3px rgba(185,136,78,.18)}
+  .journey.arrived .jhome{opacity:0}
+  .journey .jverse{margin-top:16px;font-family:'Gowun Batang',serif;font-size:12.5px;font-style:italic;color:var(--accent-deep);text-align:center;line-height:1.65}
+
+  /* 페이지네이션 */
+  .pager{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:22px}
+  .pager button{border:1px solid var(--line);background:#fff;color:var(--ink);font-family:'Gowun Dodum',sans-serif;font-size:14px;padding:9px 16px;border-radius:999px;cursor:pointer;transition:border-color .15s,color .15s}
+  .pager button:hover:not(:disabled){border-color:var(--accent);color:var(--accent-deep)}
+  .pager button:disabled{opacity:.4;cursor:default}
+  .pager .pinfo{font-family:'Gowun Dodum',sans-serif;font-size:14px;color:var(--soft);min-width:56px;text-align:center}
+
   .banner{
     max-width:var(--maxw);margin:0 auto;padding:10px 16px;font-size:13px;
     background:#fff6e6;border:1px solid #f0d9a8;border-radius:10px;color:#8a6230;text-align:center;
@@ -418,6 +439,16 @@
       <h2>💌 응원과 기도 한마디</h2>
       <div class="divider"></div>
 
+      <div class="journey" id="journey">
+        <div class="jtop"><span class="jcount" id="jcount">0 / 100</span><span class="jmsg" id="jmsg">기도로 아들의 발걸음을 옮겨주세요</span></div>
+        <div class="jtrack">
+          <div class="jfill" id="jfill"></div>
+          <div class="json" id="json">🚶</div>
+          <div class="jhome">🏠</div>
+        </div>
+        <div class="jverse">“아직도 거리가 먼데 아버지가 그를 보고 측은히 여겨 달려가 목을 안고 입을 맞추니” — 누가복음 15:20</div>
+      </div>
+
       <div id="modeBanner" class="banner" style="display:none;margin-bottom:18px"></div>
 
       <form class="form" id="cheerForm" autocomplete="off">
@@ -433,6 +464,7 @@
 
       <p class="count" id="count"></p>
       <div class="wall" id="wall"></div>
+      <div class="pager" id="pager"></div>
     </div>
   </section>
   </div><!-- /panel-pray -->
@@ -599,6 +631,15 @@ const form=document.getElementById('cheerForm');
 const submitBtn=document.getElementById('submitBtn');
 const banner=document.getElementById('modeBanner');
 const USE_BACKEND = !!BACKEND_URL;
+const pager=document.getElementById('pager');
+const journey=document.getElementById('journey');
+const jfill=document.getElementById('jfill');
+const json=document.getElementById('json');
+const jcount=document.getElementById('jcount');
+const jmsg=document.getElementById('jmsg');
+const PER_PAGE=10;
+let allComments=[];
+let page=1;
 
 if(!USE_BACKEND){
   banner.style.display='block';
@@ -614,14 +655,56 @@ function timeAgo(ts){
   const date=new Date(ts);
   return `${date.getMonth()+1}.${date.getDate()}`;
 }
+function updateJourney(total){
+  const pct=Math.min(total/100,1)*100;
+  jfill.style.width=pct+'%';
+  json.style.left=pct+'%';
+  jcount.textContent = total>=100 ? '100 / 100  🎉' : `${total} / 100`;
+  let emoji='🚶', msg;
+  if(total>=100){ emoji='🤗'; msg='아버지가 달려가 아들을 안았습니다!'; }
+  else if(total>=67){ msg='아버지가 달려나와 기다리세요'; }
+  else if(total>=34){ msg='저 멀리 아버지 집이 보여요'; }
+  else if(total>=1){ msg='집을 향해 발걸음을 떼었어요'; }
+  else { msg='기도로 아들의 발걸음을 옮겨주세요'; }
+  json.textContent=emoji;
+  jmsg.textContent=msg;
+  journey.classList.toggle('arrived', total>=100);
+}
+
+function scrollWall(){
+  const bar=document.getElementById('tabs');
+  const y=countEl.getBoundingClientRect().top+window.scrollY-(bar?bar.offsetHeight:0)-12;
+  window.scrollTo({top:y,behavior:'smooth'});
+}
+
+function renderPager(pages){
+  if(pages<=1){ pager.innerHTML=''; return; }
+  pager.innerHTML =
+    `<button type="button" id="prevPage" ${page===1?'disabled':''}>‹ 이전</button>`+
+    `<span class="pinfo">${page} / ${pages}</span>`+
+    `<button type="button" id="nextPage" ${page===pages?'disabled':''}>다음 ›</button>`;
+  document.getElementById('prevPage').onclick=()=>{ if(page>1){ page--; render(allComments); scrollWall(); } };
+  document.getElementById('nextPage').onclick=()=>{ if(page<pages){ page++; render(allComments); scrollWall(); } };
+}
+
 function render(list){
-  if(!list.length){wall.innerHTML='<div class="empty">아직 응원이 없어요. 첫 번째 응원을 남겨주세요 💛</div>';countEl.textContent='';return;}
+  allComments=list;
+  updateJourney(list.length);
+  if(!list.length){
+    wall.innerHTML='<div class="empty">아직 응원이 없어요. 첫 번째 응원을 남겨주세요 💛</div>';
+    countEl.textContent=''; pager.innerHTML=''; return;
+  }
   countEl.textContent=`💛 ${list.length}개의 기도가 쌓였어요`;
-  wall.innerHTML=list.map(m=>`
+  const pages=Math.ceil(list.length/PER_PAGE);
+  if(page>pages) page=pages;
+  if(page<1) page=1;
+  const start=(page-1)*PER_PAGE;
+  wall.innerHTML=list.slice(start,start+PER_PAGE).map(m=>`
     <div class="msg">
       <div class="top"><span class="who">${escapeHtml(m.who)}</span><span class="when">${timeAgo(m.ts)}</span></div>
       <div class="body">${escapeHtml(m.text)}</div>
     </div>`).join('');
+  renderPager(pages);
 }
 
 /* --- localStorage (미리보기 모드) --- */
@@ -656,6 +739,7 @@ form.addEventListener('submit',async e=>{
       const a=lsGet(); a.push(item); lsSet(a);
     }
     form.reset();
+    page=1;
     await load();
     document.getElementById('count').scrollIntoView({behavior:'smooth',block:'center'});
   }catch(err){
