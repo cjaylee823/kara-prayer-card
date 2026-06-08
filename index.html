@@ -513,7 +513,7 @@ function timeAgo(ts){
 }
 function render(list){
   if(!list.length){wall.innerHTML='<div class="empty">아직 응원이 없어요. 첫 번째 응원을 남겨주세요 💛</div>';countEl.textContent='';return;}
-  countEl.textContent=`💛 ${list.length}개의 응원이 모였어요`;
+  countEl.textContent=`💛 ${list.length}개의 기도가 쌓였어요`;
   wall.innerHTML=list.map(m=>`
     <div class="msg">
       <div class="top"><span class="who">${escapeHtml(m.who)}</span><span class="when">${timeAgo(m.ts)}</span></div>
