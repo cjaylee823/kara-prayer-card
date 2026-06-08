@@ -122,18 +122,30 @@
   .prog .item .em{font-size:22px}
   .prog .item p{margin:0;color:var(--soft);font-size:15px}
 
-  /* prayer list */
-  .prayers{counter-reset:p;display:grid;gap:16px}
+  /* prayer list (collapsible) */
+  .prayers{counter-reset:p;display:grid;gap:14px;margin-bottom:44px}
   .pray{
-    position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;
-    padding:20px 22px 20px 56px;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;
   }
-  .pray::before{
+  .pray>summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;
+    padding:18px 20px;font-family:'Gowun Batang',serif;font-size:16px;font-weight:700;color:var(--ink);
+    -webkit-tap-highlight-color:transparent;
+  }
+  .pray>summary::-webkit-details-marker{display:none}
+  .pray>summary::before{
     counter-increment:p;content:counter(p);
-    position:absolute;left:18px;top:20px;width:26px;height:26px;border-radius:50%;
-    background:var(--accent);color:#fff;font-family:'Gowun Dodum',sans-serif;font-size:14px;
+    flex:0 0 auto;width:26px;height:26px;border-radius:50%;
+    background:var(--accent);color:#fff;font-family:'Gowun Dodum',sans-serif;font-size:14px;font-weight:400;
     display:flex;align-items:center;justify-content:center;
   }
+  .pray>summary .arrow{
+    margin-left:auto;flex:0 0 auto;color:var(--accent);font-size:13px;
+    transition:transform .2s ease;
+  }
+  .pray[open]>summary .arrow{transform:rotate(180deg)}
+  .pray>summary:hover{background:#fffaf1}
+  .pray .content{padding:2px 20px 20px 58px;color:#473f38}
   .pray .ref{display:block;margin-top:10px;font-family:'Gowun Batang',serif;font-style:italic;color:var(--accent-deep);font-size:14px}
 
   /* support box */
@@ -323,11 +335,26 @@
     <h2>🙏 함께 기도해 주세요</h2>
     <div class="divider"></div>
     <div class="prayers">
-      <div class="pray">이번 단기선교를 통해 우리를 지으신 하나님의 목적, 곧 하나님을 찬송함에 대한 깊은 은혜와 깨달음이 부어지게 하소서.<span class="ref">“이 백성은 내가 나를 위하여 지었나니 나를 찬송하게 하려 함이니라” — 이사야 43:21</span></div>
-      <div class="pray">이 여정을 통하여 각자의 일상 속 바람과 꿈을 주님께 내려놓고, 하나님께서 주신 세상 영혼들을 향한 구원의 비전을 발견하게 하소서.<span class="ref">“나를 따라오라 내가 너희를 사람을 낚는 어부가 되게 하리라” — 마태복음 4:19</span></div>
-      <div class="pray">이번 선교 여행에서 아버지와 아들 됨을 깊게 경험하는 은혜를 허락하소서.<span class="ref">“아직도 거리가 먼데 아버지가 그를 보고 측은히 여겨 달려가 목을 안고 입을 맞추니” — 누가복음 15:20</span></div>
-      <div class="pray">카라 선교팀과 현지 배기창·최수정 선교사님, AOICC 교회의 연합을 통해 동역으로 일하시는 하나님을 목도하게 하소서.<span class="ref">“하나님을 사랑하는 자… 에게는 모든 것이 합력하여 선을 이루느니라” — 로마서 8:28</span></div>
-      <div class="pray">선교 여정 가운데 안전과 건강을 지켜주시고, 자비량으로 떠나는 모든 팀원에게 필요한 모든 물질의 공급하심을 경험하게 하소서.<span class="ref">“각 사람의 필요를 따라 나누어 줌이라” — 사도행전 4:34–35</span></div>
+      <details class="pray" open>
+        <summary>하나님을 찬송하게 하소서<span class="arrow">▾</span></summary>
+        <div class="content">이번 단기선교를 통해 우리를 지으신 하나님의 목적, 곧 하나님을 찬송함에 대한 깊은 은혜와 깨달음이 부어지게 하소서.<span class="ref">“이 백성은 내가 나를 위하여 지었나니 나를 찬송하게 하려 함이니라” — 이사야 43:21</span></div>
+      </details>
+      <details class="pray" open>
+        <summary>구원의 비전을 발견하게 하소서<span class="arrow">▾</span></summary>
+        <div class="content">이 여정을 통하여 각자의 일상 속 바람과 꿈을 주님께 내려놓고, 하나님께서 주신 세상 영혼들을 향한 구원의 비전을 발견하게 하소서.<span class="ref">“나를 따라오라 내가 너희를 사람을 낚는 어부가 되게 하리라” — 마태복음 4:19</span></div>
+      </details>
+      <details class="pray" open>
+        <summary>아버지와 아들 됨을 경험하게 하소서<span class="arrow">▾</span></summary>
+        <div class="content">이번 선교 여행에서 아버지와 아들 됨을 깊게 경험하는 은혜를 허락하소서.<span class="ref">“아직도 거리가 먼데 아버지가 그를 보고 측은히 여겨 달려가 목을 안고 입을 맞추니” — 누가복음 15:20</span></div>
+      </details>
+      <details class="pray" open>
+        <summary>선교사님·현지 교회와 연합하게 하소서<span class="arrow">▾</span></summary>
+        <div class="content">카라 선교팀과 현지 배기창·최수정 선교사님, AOICC 교회의 연합을 통해 동역으로 일하시는 하나님을 목도하게 하소서.<span class="ref">“하나님을 사랑하는 자… 에게는 모든 것이 합력하여 선을 이루느니라” — 로마서 8:28</span></div>
+      </details>
+      <details class="pray" open>
+        <summary>안전과 필요한 모든 것을 공급하소서<span class="arrow">▾</span></summary>
+        <div class="content">선교 여정 가운데 안전과 건강을 지켜주시고, 자비량으로 떠나는 모든 팀원에게 필요한 모든 물질의 공급하심을 경험하게 하소서.<span class="ref">“각 사람의 필요를 따라 나누어 줌이라” — 사도행전 4:34–35</span></div>
+      </details>
     </div>
   </section>
 
