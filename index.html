@@ -102,6 +102,20 @@
   p{margin:0 0 14px}
   .lead{color:var(--soft)}
 
+  .mapfig{margin:22px 0 6px;text-align:center}
+  .mapfig img{max-width:260px;width:70%;border-radius:12px;border:1px solid var(--line)}
+  .mapfig figcaption{margin-top:9px;font-family:'Gowun Dodum',sans-serif;font-size:12px;color:var(--soft)}
+  .links{display:grid;gap:10px;margin-top:20px}
+  .links a{
+    display:flex;align-items:center;gap:12px;text-decoration:none;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+    color:var(--ink);font-size:15px;transition:border-color .15s,background .15s;
+  }
+  .links a:hover{border-color:var(--accent);background:#fffaf1}
+  .links a .ico{font-size:19px;flex:0 0 auto}
+  .links a .lbl{flex:1;min-width:0}
+  .links a .ext{color:var(--accent);flex:0 0 auto;font-size:13px}
+
   .verse{
     margin:20px 0;padding:18px 22px;border-left:3px solid var(--accent);
     background:#fff;border-radius:0 12px 12px 0;
@@ -324,8 +338,18 @@
     <h2>어디로 복음을 전하러 가나요?</h2>
     <div class="divider"></div>
     <h3>✈️ 필리핀 카비테 (Cavite)</h3>
+    <figure class="mapfig">
+      <img src="assets/cavite-map.png" alt="필리핀 루손섬 카비테 위치 지도" loading="lazy" />
+      <figcaption>카비테 위치 — 필리핀 루손섬 (마닐라 남서쪽)</figcaption>
+    </figure>
     <p class="lead">카비테 지역은 루손섬에 위치하며 인구는 약 10만 명, 마닐라만에 접해 마닐라 남서쪽 약 16km 지점에 있습니다. 카라는 2007년부터 이 지역에 교회를 세우고 복음화를 위해 힘써오신 <b>배기창·최수정 선교사님</b>과 협력하여, 빈민촌 랑까안 지역을 섬기는 <b>All One in Christ Church(AOICC)</b>에서 사역을 감당합니다.</p>
     <p class="lead">카라의 필리핀 선교는 이번이 처음이 아니에요. 하나님의 임재하심을 경험했던 지난 겨울에 이어, 다시 그 땅을 찾아갑니다 😍</p>
+    <div class="links">
+      <a href="https://youtu.be/R3WLOIM0XlE?si=TYQw8UCE8nllATmI" target="_blank" rel="noopener"><span class="ico">⛪</span><span class="lbl">교회 소개 영상 보기</span><span class="ext">▶ YouTube</span></a>
+      <a href="https://youtube.com/@karaarts?si=Ee4Gu351Ta3Ma6U0" target="_blank" rel="noopener"><span class="ico">📺</span><span class="lbl">카라 KARA:Arts 유튜브 채널</span><span class="ext">▶ YouTube</span></a>
+      <a href="https://youtu.be/vwJjeZBeQRs?si=ySPnNStN_4uW6XHu" target="_blank" rel="noopener"><span class="ico">🎬</span><span class="lbl">2023년 단기선교 영상 보기</span><span class="ext">▶ YouTube</span></a>
+      <a href="https://youtube.com/playlist?list=PLz1lcKKtJJOidUwbYvcKCUoC_N0gGLKIN&si=g9VAFGGXU0pqtSbD" target="_blank" rel="noopener"><span class="ico">🎬</span><span class="lbl">2025년 단기선교 영상 보기</span><span class="ext">▶ YouTube</span></a>
+    </div>
   </section>
 
   <!-- ============ PROGRAM ============ -->
