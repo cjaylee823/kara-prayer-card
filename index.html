@@ -147,6 +147,13 @@
   .pray>summary:hover{background:#fffaf1}
   .pray .content{padding:2px 20px 20px 58px;color:#473f38}
   .pray .ref{display:block;margin-top:10px;font-family:'Gowun Batang',serif;font-style:italic;color:var(--accent-deep);font-size:14px}
+  .prayctl{display:flex;justify-content:flex-end;margin-bottom:12px}
+  .prayctl button{
+    border:1px solid var(--line);background:#fff;color:var(--soft);cursor:pointer;
+    font-family:'Gowun Dodum',sans-serif;font-size:13px;padding:7px 15px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:6px;transition:color .15s,border-color .15s;
+  }
+  .prayctl button:hover{border-color:var(--accent);color:var(--accent-deep)}
 
   /* support box */
   .support{background:linear-gradient(160deg,#fff,#fbf2e3);border:1px solid var(--accent);border-radius:16px;padding:26px;text-align:center}
@@ -334,6 +341,7 @@
     <p class="sec-tag">Pray With Us</p>
     <h2>🙏 함께 기도해 주세요</h2>
     <div class="divider"></div>
+    <div class="prayctl"><button type="button" id="toggleAll">모두 접기</button></div>
     <div class="prayers">
       <details class="pray" open>
         <summary>하나님을 찬송하게 하소서<span class="arrow">▾</span></summary>
@@ -450,6 +458,21 @@ const MEMBERS = [
     document.getElementById(t.dataset.target).classList.add('active');
     window.scrollTo({top:bar.offsetTop,behavior:'smooth'});
   }));
+})();
+
+/* ---------- 기도제목 모두 접기/펼치기 ---------- */
+(function setupToggleAll(){
+  const btn=document.getElementById('toggleAll');
+  if(!btn) return;
+  const prays=()=>[...document.querySelectorAll('.prayers .pray')];
+  function sync(){ btn.textContent = prays().some(p=>p.open) ? '모두 접기' : '모두 펼치기'; }
+  btn.addEventListener('click',()=>{
+    const anyOpen=prays().some(p=>p.open);
+    prays().forEach(p=>p.open=!anyOpen);
+    sync();
+  });
+  prays().forEach(p=>p.addEventListener('toggle',sync));
+  sync();
 })();
 
 /* ---------- QR & URL ---------- */
