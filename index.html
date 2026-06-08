@@ -179,6 +179,23 @@
     background:#fff6e6;border:1px solid #f0d9a8;border-radius:10px;color:#8a6230;text-align:center;
   }
 
+  /* ---------- TABS ---------- */
+  .tabs{
+    position:sticky;top:0;z-index:30;display:flex;gap:6px;justify-content:center;
+    background:rgba(251,247,240,.9);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);padding:8px 12px;
+  }
+  .tab{
+    flex:1;max-width:230px;border:none;background:transparent;cursor:pointer;
+    font-family:'Gowun Dodum',sans-serif;font-size:15px;color:var(--soft);
+    padding:12px 8px;border-radius:11px;transition:color .15s,background .15s;
+  }
+  .tab.active{color:var(--accent-deep);font-weight:700;background:#fff;box-shadow:0 2px 8px rgba(120,90,40,.1)}
+  .tab:hover{color:var(--accent-deep)}
+  .panel{display:none;animation:fade .3s ease both}
+  .panel.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
   /* ---------- QR / SHARE ---------- */
   .qrsec{text-align:center}
   .qrbox{
@@ -199,7 +216,8 @@
   footer .cross{font-size:18px;color:var(--accent);margin-bottom:10px}
 
   @media print{
-    .cheer,.form,.sharebtns,.banner{display:none}
+    .cheer,.form,.sharebtns,.banner,.tabs{display:none}
+    .panel{display:block!important}
     body{background:#fff}
   }
 </style>
@@ -217,7 +235,13 @@
   <p class="theme"><small>이번 선교의 주제</small>우리를 지으신 하나님을<br/>찬송하는 제자들</p>
 </header>
 
+<nav class="tabs" id="tabs">
+  <button class="tab active" type="button" data-target="panel-intro">📖 선교 이야기</button>
+  <button class="tab" type="button" data-target="panel-pray">🙏 기도 · 응원</button>
+</nav>
+
 <main>
+  <div class="panel active" id="panel-intro">
   <!-- ============ WHO ============ -->
   <section class="wrap">
     <p class="sec-tag">Who We Are</p>
@@ -261,6 +285,17 @@
     </div>
   </section>
 
+  <!-- ============ SUPPORT ============ -->
+  <section class="wrap">
+    <div class="support">
+      <div class="label">후원 문의</div>
+      <div class="num">010-5593-9610</div>
+      <div class="bank">카카오뱅크 3333-18-5192491 · 예금주 이주찬</div>
+    </div>
+  </section>
+  </div><!-- /panel-intro -->
+
+  <div class="panel" id="panel-pray">
   <!-- ============ PRAYER ============ -->
   <section class="wrap">
     <p class="sec-tag">Pray With Us</p>
@@ -272,15 +307,6 @@
       <div class="pray">이번 선교 여행에서 아버지와 아들 됨을 깊게 경험하는 은혜를 허락하소서.<span class="ref">“아직도 거리가 먼데 아버지가 그를 보고 측은히 여겨 달려가 목을 안고 입을 맞추니” — 누가복음 15:20</span></div>
       <div class="pray">카라 선교팀과 현지 배기창·최수정 선교사님, AOICC 교회의 연합을 통해 동역으로 일하시는 하나님을 목도하게 하소서.<span class="ref">“하나님을 사랑하는 자… 에게는 모든 것이 합력하여 선을 이루느니라” — 로마서 8:28</span></div>
       <div class="pray">선교 여정 가운데 안전과 건강을 지켜주시고, 자비량으로 떠나는 모든 팀원에게 필요한 모든 물질의 공급하심을 경험하게 하소서.<span class="ref">“각 사람의 필요를 따라 나누어 줌이라” — 사도행전 4:34–35</span></div>
-    </div>
-  </section>
-
-  <!-- ============ SUPPORT ============ -->
-  <section class="wrap">
-    <div class="support">
-      <div class="label">후원 문의</div>
-      <div class="num">010-5593-9610</div>
-      <div class="bank">카카오뱅크 3333-18-5192491 · 예금주 이주찬</div>
     </div>
   </section>
 
@@ -308,6 +334,7 @@
       <div class="wall" id="wall"></div>
     </div>
   </section>
+  </div><!-- /panel-pray -->
 
   <!-- ============ QR / SHARE ============ -->
   <section class="qrsec wrap" id="share">
@@ -358,6 +385,20 @@ const MEMBERS = [
   el.innerHTML=MEMBERS.map(m=>
     `<div class="member${m.role?' lead':''}">${m.name}${m.role?`<span class="role">${m.role}</span>`:''}</div>`
   ).join('');
+})();
+
+/* ---------- 탭 전환 ---------- */
+(function setupTabs(){
+  const tabs=document.querySelectorAll('.tab');
+  const panels=document.querySelectorAll('.panel');
+  const bar=document.getElementById('tabs');
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.remove('active'));
+    panels.forEach(p=>p.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(t.dataset.target).classList.add('active');
+    window.scrollTo({top:bar.offsetTop,behavior:'smooth'});
+  }));
 })();
 
 /* ---------- QR & URL ---------- */
