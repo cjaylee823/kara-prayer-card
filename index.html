@@ -235,9 +235,11 @@
   .journey .json{position:absolute;top:50%;left:0;transform:translate(-50%,-50%);font-size:25px;transition:left .9s ease;z-index:2}
   .journey .jhome{position:absolute;left:-2px;top:50%;transform:translateY(-50%);font-size:24px}
   .journey.arrived{box-shadow:0 0 0 3px rgba(185,136,78,.18)}
-  .journey .jhug{display:none}
+  .journey .jhug{display:none;margin:0}
   .journey.arrived .jtrack{display:none}
-  .journey.arrived .jhug{display:block;width:120px;margin:2px auto 0;animation:hugpop .6s ease both}
+  .journey.arrived .jhug{display:block;width:152px;margin:4px auto 0;animation:hugpop .6s ease both}
+  .journey .jhug img{width:100%;display:block;border-radius:12px;border:1px solid #e6cfa6;box-shadow:0 5px 16px rgba(120,90,40,.2)}
+  .journey .jhug figcaption{margin-top:9px;font-family:'Gowun Dodum',sans-serif;font-size:11px;color:var(--soft);letter-spacing:.02em}
   @keyframes hugpop{0%{opacity:0;transform:scale(.82)}60%{transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
   .journey .jverse{margin-top:16px;font-family:'Gowun Batang',serif;font-size:12.5px;font-style:italic;color:var(--accent-deep);text-align:center;line-height:1.65}
 
@@ -449,7 +451,10 @@
           <div class="json" id="json">🚶</div>
           <div class="jhome">🏠</div>
         </div>
-        <img class="jhug" src="assets/embrace.svg" alt="아버지가 아들을 품에 안는 모습" />
+        <figure class="jhug">
+          <img src="assets/prodigal-embrace.jpg" alt="아버지가 무릎 꿇은 아들을 품에 안는 모습 — 렘브란트 돌아온 탕자" loading="lazy" />
+          <figcaption>렘브란트, 〈돌아온 탕자〉 (1669)</figcaption>
+        </figure>
         <div class="jverse">“아직도 거리가 먼데 아버지가 그를 보고 측은히 여겨 달려가 목을 안고 입을 맞추니” — 누가복음 15:20</div>
       </div>
 
