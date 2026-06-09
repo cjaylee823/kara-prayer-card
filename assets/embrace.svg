@@ -1,21 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 140" role="img" aria-label="아버지가 아들을 품에 안는 모습">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" role="img" aria-label="아버지가 아들을 품에 안는 모습">
   <!-- warm glow -->
-  <circle cx="80" cy="74" r="66" fill="#f7e6cf"/>
-  <circle cx="80" cy="74" r="66" fill="none" stroke="#e6cfa6" stroke-width="1.5"/>
+  <circle cx="75" cy="75" r="68" fill="#f7e6cf"/>
+  <circle cx="75" cy="75" r="68" fill="none" stroke="#e6cfa6" stroke-width="1.5"/>
 
-  <!-- Father (taller, behind) -->
-  <path d="M70 134 C64 98 70 64 92 60 C114 64 122 98 116 134 Z" fill="#8a6230"/>
-  <circle cx="98" cy="42" r="17" fill="#f0cb9e"/>
-  <path d="M98 24 C113 24 117 38 115 51 C110 43 104 40 98 40 C92 40 86 43 81 51 C79 38 83 24 98 24 Z" fill="#5b3d1d"/>
-  <path d="M83 50 C85 64 111 64 113 50 C113 60 107 70 98 70 C89 70 83 60 83 50 Z" fill="#5b3d1d"/>
+  <!-- Father: standing, taller (right) -->
+  <path d="M77 143 L77 73 C77 62 84 56 92 56 C100 56 108 62 108 73 L108 143 Z" fill="#8a6230"/>
+  <circle cx="92" cy="39" r="15" fill="#f0cb9e"/>
+  <path d="M92 22 C106 22 110 35 108 47 C104 40 98 37 92 37 C86 37 80 40 76 47 C74 35 78 22 92 22 Z" fill="#5b3d1d"/>
+  <path d="M79 46 C81 59 103 59 105 46 C105 56 99 65 92 65 C85 65 79 56 79 46 Z" fill="#5b3d1d"/>
 
-  <!-- Son (shorter, in front, leaning into father) -->
-  <path d="M28 134 C26 104 33 80 52 77 C71 80 75 104 71 134 Z" fill="#c79a5c"/>
+  <!-- Son: standing, shorter (left), leaning into father -->
+  <path d="M40 143 L40 87 C40 77 47 72 54 72 C61 72 68 77 68 87 L68 143 Z" fill="#c79a5c"/>
+  <circle cx="54" cy="61" r="13" fill="#f6d6ae"/>
+  <path d="M54 48 C65 48 68 56 67 64 C63 57 58 55 54 55 C50 55 45 57 41 64 C40 56 43 48 54 48 Z" fill="#33220f"/>
+
   <!-- son's arm around father's waist -->
-  <path d="M58 88 C76 82 92 88 100 104" fill="none" stroke="#c79a5c" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="52" cy="67" r="14.5" fill="#f6d6ae"/>
-  <path d="M52 53 C64 53 67 61 66 70 C62 63 57 61 52 61 C47 61 42 63 38 70 C37 61 40 53 52 53 Z" fill="#33220f"/>
-
-  <!-- Father's arm wrapping over son's back (the embrace) -->
-  <path d="M93 64 C74 56 50 62 40 86" fill="none" stroke="#8a6230" stroke-width="13" stroke-linecap="round"/>
+  <path d="M60 85 C74 79 90 83 99 97" fill="none" stroke="#c79a5c" stroke-width="11" stroke-linecap="round"/>
+  <!-- father's arm over son's shoulder & back (the embrace) -->
+  <path d="M95 59 C78 51 56 57 47 79" fill="none" stroke="#8a6230" stroke-width="13" stroke-linecap="round"/>
 </svg>
