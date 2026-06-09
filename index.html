@@ -677,17 +677,30 @@ function timeAgo(ts){
   const date=new Date(ts);
   return `${date.getMonth()+1}.${date.getDate()}`;
 }
+const JOURNEY_STAGES = [
+  { min: 90, msg: '두 팔 벌린 아버지, 이제 몇 걸음 남았어요' },
+  { min: 75, msg: '아버지가 아들을 보고 달려나오세요' },
+  { min: 60, msg: '아들의 발걸음이 빨라지고 마음이 설레요' },
+  { min: 50, msg: '절반의 길 — 집이 점점 가까워져요' },
+  { min: 40, msg: '저 멀리 아버지의 집이 보이기 시작해요' },
+  { min: 25, msg: '아들이 돌이켜 아버지의 품을 향해 걸어가요' },
+  { min: 10, msg: '아들이 먼 길을 한 걸음씩 집으로 향해요' },
+  { min: 1,  msg: '아들이 일어나 집을 향해 첫 걸음을 떼었어요' },
+  { min: 0,  msg: '기도로 아들의 발걸음을 옮겨주세요' },
+];
+
 function updateJourney(total){
   const pct=Math.min(total/100,1)*100;
   jfill.style.width=pct+'%';
   json.style.left=(100-pct)+'%';
   jcount.textContent = total>=100 ? '100 / 100  🎉' : `${total} / 100`;
   let emoji='🚶', msg;
-  if(total>=100){ emoji='🤗'; msg='아버지가 달려가 아들을 안았습니다!'; }
-  else if(total>=67){ msg='아버지가 달려나와 기다리세요'; }
-  else if(total>=34){ msg='저 멀리 아버지 집이 보여요'; }
-  else if(total>=1){ msg='집을 향해 발걸음을 떼었어요'; }
-  else { msg='기도로 아들의 발걸음을 옮겨주세요'; }
+  if(total>=100){
+    emoji='🤗';
+    msg='아버지가 달려가 아들을 안았습니다!';
+  } else {
+    msg = JOURNEY_STAGES.find(s => total >= s.min).msg;
+  }
   json.textContent=emoji;
   jmsg.textContent=msg;
   journey.classList.toggle('arrived', total>=100);
